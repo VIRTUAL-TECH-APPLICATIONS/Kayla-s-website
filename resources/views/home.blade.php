@@ -241,6 +241,8 @@
         .reveal.from-right { transform: translateX(36px); }
         .reveal.zoom { transform: scale(.94); }
         .reveal.is-visible { opacity: 1; transform: none; }
+        /* Fade out together, without the staggered fade-in delay */
+        .reveal:not(.is-visible) { transition-delay: 0s; }
 
         /* No-JS fallback: show everything */
         .no-js .reveal { opacity: 1; transform: none; }
@@ -501,12 +503,15 @@
             }
             var io = new IntersectionObserver(function (entries) {
                 entries.forEach(function (entry) {
-                    if (entry.isIntersecting) {
+                    // Fade in once 15% is on screen; fade out only when fully off screen,
+                    // so elements near the edge don't flicker.
+                    if (entry.intersectionRatio >= 0.15) {
                         entry.target.classList.add('is-visible');
-                        io.unobserve(entry.target);
+                    } else if (!entry.isIntersecting) {
+                        entry.target.classList.remove('is-visible');
                     }
                 });
-            }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+            }, { threshold: [0, 0.15], rootMargin: '0px 0px -40px 0px' });
             items.forEach(function (el) { io.observe(el); });
         })();
 
