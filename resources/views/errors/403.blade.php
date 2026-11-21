@@ -1,0 +1,5 @@
+@extends('errors.layout')
+@section('code', '403')
+@section('title', 'Access denied')
+@section('heading', 'This corner is off limits.')
+@section('message', "You don't have permission to view this page. If you think that's a mistake, give us a call and we'll sort it out.")

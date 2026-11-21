@@ -1,0 +1,5 @@
+@extends('errors.layout')
+@section('code', '401')
+@section('title', 'Sign in required')
+@section('heading', 'Please sign in first.')
+@section('message', "This corner is for signed-in visitors. Sign in and you'll be right where you wanted to be.")

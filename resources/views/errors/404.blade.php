@@ -1,0 +1,5 @@
+@extends('errors.layout')
+@section('code', '404')
+@section('title', 'Page not found')
+@section('heading', 'Nothing in this corner.')
+@section('message', "The page you're looking for has moved, been retired, or never existed. Let's get you back to the good finds.")
