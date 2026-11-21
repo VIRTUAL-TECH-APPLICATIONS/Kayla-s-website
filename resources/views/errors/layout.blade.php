@@ -10,6 +10,14 @@
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <meta name="theme-color" content="#fbf5ec">
+    <script>
+        try {
+            if (localStorage.getItem('kk-theme') === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                document.querySelector('meta[name=theme-color]').setAttribute('content', '#1a1713');
+            }
+        } catch (e) {}
+    </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,6 +35,20 @@
             --ink-soft: #5d554a;
             --serif: 'Fraunces', Georgia, serif;
             --sans: 'DM Sans', system-ui, -apple-system, sans-serif;
+            --btn-hover: #443d33;
+            color-scheme: light;
+        }
+        :root[data-theme="dark"] {
+            --cream: #1a1713;
+            --cream-deep: #2e2822;
+            --peach: #e9b98f;
+            --peach-soft: #33271e;
+            --olive: #b5a167;
+            --olive-deep: #d3bf83;
+            --ink: #f2eadf;
+            --ink-soft: #b9ad9d;
+            --btn-hover: #ffffff;
+            color-scheme: dark;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         html, body { height: 100%; }
@@ -77,7 +99,7 @@
         }
         .btn svg { width: 18px; height: 18px; }
         .btn-primary { background: var(--ink); color: var(--cream); box-shadow: 0 18px 40px -18px rgba(70,50,25,.45); }
-        .btn-primary:hover { transform: translateY(-2px); background: #443d33; }
+        .btn-primary:hover { transform: translateY(-2px); background: var(--btn-hover); }
         .btn-ghost:hover { background: var(--ink); color: var(--cream); }
 
         .help { margin-top: 36px; font-size: .92rem; color: var(--ink-soft); }

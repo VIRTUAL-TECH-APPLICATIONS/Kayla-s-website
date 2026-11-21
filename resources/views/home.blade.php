@@ -17,7 +17,14 @@
     <meta property="og:description" content="Honest product reviews and helpful finds for home, tech, pets and everyday living.">
     <meta property="og:image" content="{{ asset('assets/brand/icon-512.png') }}">
 
-    <script>document.documentElement.classList.add('is-loading');</script>
+    <script>
+        (function (d) {
+            d.classList.add('is-loading');
+            // Light is the default; only switch if the visitor chose dark before.
+            try { if (localStorage.getItem('kk-theme') === 'dark') d.setAttribute('data-theme', 'dark'); } catch (e) {}
+            if (d.getAttribute('data-theme') === 'dark') document.querySelector('meta[name=theme-color]').setAttribute('content', '#1a1713');
+        })(document.documentElement);
+    </script>
     <noscript><style>.preloader { display: none !important; }</style></noscript>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -41,7 +48,63 @@
             --shadow: 0 18px 40px -18px rgba(70, 50, 25, .35);
             --serif: 'Fraunces', Georgia, serif;
             --sans: 'DM Sans', system-ui, -apple-system, sans-serif;
+
+            /* Role colours (things that must not simply invert) */
+            --header-bg: rgba(251, 245, 236, .86);
+            --btn-hover: #443d33;
+            --band-bg: var(--olive);
+            --on-band: #fffdf9;
+            --band-eyebrow: #fbe4cf;
+            --footer-bg: #2e2a24;
+            --footer-fg: #fbf5ec;
+            --blob-opacity: .7;
+            color-scheme: light;
         }
+
+        /* Dark theme: warm espresso, same personality */
+        :root[data-theme="dark"] {
+            --cream: #1a1713;
+            --cream-deep: #2e2822;
+            --peach: #e9b98f;
+            --peach-soft: #33271e;
+            --olive: #b5a167;
+            --olive-deep: #d3bf83;
+            --sage: #7f9c4c;
+            --ink: #f2eadf;
+            --ink-soft: #b9ad9d;
+            --white: #231f1a;
+            --shadow: 0 18px 40px -18px rgba(0, 0, 0, .7);
+
+            --header-bg: rgba(26, 23, 19, .82);
+            --btn-hover: #ffffff;
+            --band-bg: #3b3420;
+            --on-band: #f6efe3;
+            --band-eyebrow: #e9cfa9;
+            --footer-bg: #110f0c;
+            --footer-fg: #efe6d9;
+            --blob-opacity: .12;
+            color-scheme: dark;
+        }
+
+        /* ---------- Theme toggle ---------- */
+        .nav-links { margin-left: auto; }
+        .nav-tools { display: flex; align-items: center; gap: 6px; margin-left: 28px; }
+        ::view-transition-old(root), ::view-transition-new(root) { animation-duration: .45s; }
+        .theme-toggle {
+            position: relative; width: 42px; height: 42px; border-radius: 50%;
+            border: 1.5px solid var(--cream-deep); background: var(--white); color: var(--ink);
+            display: grid; place-items: center; cursor: pointer;
+            transition: border-color .3s ease, transform .3s ease, background .3s ease;
+        }
+        .theme-toggle:hover { border-color: var(--olive); transform: rotate(-12deg); }
+        .theme-toggle:focus-visible { outline: 2px solid var(--olive); outline-offset: 3px; }
+        .theme-toggle svg {
+            position: absolute; width: 20px; height: 20px;
+            transition: transform .5s cubic-bezier(.34,1.56,.64,1), opacity .3s ease;
+        }
+        .theme-toggle .i-sun { opacity: 0; transform: rotate(-90deg) scale(.4); }
+        [data-theme="dark"] .theme-toggle .i-sun { opacity: 1; transform: none; }
+        [data-theme="dark"] .theme-toggle .i-moon { opacity: 0; transform: rotate(90deg) scale(.4); }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -83,7 +146,7 @@
             transition: transform .25s ease, background .25s ease, box-shadow .25s ease;
         }
         .btn-primary { background: var(--ink); color: var(--cream); box-shadow: var(--shadow); }
-        .btn-primary:hover { transform: translateY(-2px); background: #443d33; }
+        .btn-primary:hover { transform: translateY(-2px); background: var(--btn-hover); }
         .btn-ghost { border: 1.5px solid var(--ink); }
         .btn-ghost:hover { background: var(--ink); color: var(--cream); }
         .btn svg { width: 18px; height: 18px; transition: transform .25s ease; }
@@ -92,7 +155,7 @@
         /* ---------- Header ---------- */
         .site-header {
             position: sticky; top: 0; z-index: 50;
-            background: rgba(251, 245, 236, .86);
+            background: var(--header-bg);
             backdrop-filter: saturate(140%) blur(10px);
             -webkit-backdrop-filter: saturate(140%) blur(10px);
             border-bottom: 1px solid transparent;
@@ -229,18 +292,18 @@
         .card p { color: var(--ink-soft); font-size: .95rem; }
 
         /* ---------- Promise ---------- */
-        .promise { padding: 110px 0; background: var(--olive); color: var(--white); position: relative; overflow: hidden; }
+        .promise { padding: 110px 0; background: var(--band-bg); color: var(--on-band); position: relative; overflow: hidden; }
         .promise::before, .promise::after {
             content: ''; position: absolute; width: 240px; height: 240px; opacity: .25;
             background-image:
-                linear-gradient(var(--cream) 1px, transparent 1px),
-                linear-gradient(90deg, var(--cream) 1px, transparent 1px);
+                linear-gradient(var(--on-band) 1px, transparent 1px),
+                linear-gradient(90deg, var(--on-band) 1px, transparent 1px);
             background-size: 40px 40px;
         }
         .promise::before { top: 30px; right: 30px; }
         .promise::after { bottom: 30px; left: 30px; }
         .promise-grid { display: grid; grid-template-columns: 1fr 1.25fr; gap: 72px; align-items: center; position: relative; z-index: 1; }
-        .promise .eyebrow { color: var(--peach-soft); }
+        .promise .eyebrow { color: var(--band-eyebrow); }
         .promise h2 { font-size: clamp(2rem, 3.6vw, 2.9rem); margin-bottom: 18px; }
         .promise-intro { opacity: .92; margin-bottom: 30px; }
         .arch { border-radius: 260px 260px var(--radius) var(--radius); overflow: hidden; box-shadow: 0 24px 50px -20px rgba(0,0,0,.45); max-width: 420px; }
@@ -252,7 +315,7 @@
             transition: background .3s ease;
         }
         .promises li:hover { background: rgba(255,253,249,.2); }
-        .check { flex: none; width: 30px; height: 30px; border-radius: 50%; background: var(--cream); color: var(--olive-deep); display: grid; place-items: center; }
+        .check { flex: none; width: 30px; height: 30px; border-radius: 50%; background: var(--on-band); color: #7d6d3c; display: grid; place-items: center; }
         .check svg { width: 16px; height: 16px; }
         .promise-note { margin-top: 28px; opacity: .92; }
 
@@ -265,7 +328,7 @@
         }
         .cta-box::before {
             content: ''; position: absolute; width: 380px; height: 380px; border-radius: 50%;
-            background: var(--peach); right: -120px; top: -140px; opacity: .7;
+            background: var(--peach); right: -120px; top: -140px; opacity: var(--blob-opacity);
         }
         .cta-box > * { position: relative; }
         .cta h2 { font-size: clamp(2rem, 3.8vw, 3rem); margin-bottom: 18px; }
@@ -275,7 +338,7 @@
         .cta-img img { width: 100%; aspect-ratio: 1; object-fit: cover; }
 
         /* ---------- Footer ---------- */
-        footer { background: var(--ink); color: var(--cream); padding: 56px 0 36px; }
+        footer { background: var(--footer-bg); color: var(--footer-fg); padding: 56px 0 36px; }
         .foot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 24px; }
         .foot-motto { font-family: var(--serif); font-size: 1.25rem; font-style: italic; color: var(--peach); }
         .cta-actions { display: flex; flex-wrap: wrap; gap: 12px; }
@@ -410,15 +473,21 @@
     <header class="site-header" id="top">
         <nav class="container nav" aria-label="Main">
             <a href="#top" class="logo"><svg class="logo-mark" aria-hidden="true"><use href="#kk-mark"/></svg> Kayla's Korner</a>
-            <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-            </button>
             <ul class="nav-links" id="nav-links">
                 <li><a href="#why">About</a></li>
                 <li><a href="#explore">Explore</a></li>
                 <li><a href="#promise">My Promise</a></li>
                 <li><a href="#shop">Say Hello</a></li>
             </ul>
+            <div class="nav-tools">
+                <button class="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false">
+                    <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5 8.5 8.5 0 1 0 20.5 14.2Z"/></svg>
+                    <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/></svg>
+                </button>
+                <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+                </button>
+            </div>
         </nav>
     </header>
 
@@ -682,6 +751,38 @@
             }
             window.addEventListener('scroll', onScroll, { passive: true });
             onScroll();
+        })();
+
+        // Theme toggle (light by default, choice remembered)
+        (function () {
+            var root = document.documentElement;
+            var btn = document.querySelector('.theme-toggle');
+            var meta = document.querySelector('meta[name=theme-color]');
+
+            function sync() {
+                var dark = root.getAttribute('data-theme') === 'dark';
+                btn.setAttribute('aria-pressed', dark);
+                btn.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+                meta.setAttribute('content', dark ? '#1a1713' : '#fbf5ec');
+            }
+            function apply(theme) {
+                if (theme === 'dark') root.setAttribute('data-theme', 'dark');
+                else root.removeAttribute('data-theme');
+                try { localStorage.setItem('kk-theme', theme); } catch (e) {}
+                sync();
+            }
+
+            btn.addEventListener('click', function () {
+                var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+                var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                // Smooth cross-fade where the browser supports it; instant otherwise.
+                if (document.startViewTransition && !reduced) {
+                    document.startViewTransition(function () { apply(next); });
+                } else {
+                    apply(next);
+                }
+            });
+            sync();
         })();
 
         // Mobile menu
