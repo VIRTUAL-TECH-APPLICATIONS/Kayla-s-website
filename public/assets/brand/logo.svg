@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 64" width="360" height="64">
+  <title>Kayla's Korner</title>
+  <style>@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&amp;display=swap');</style>
+  <path fill="#F6CFAB" d="M14 0H50A14 14 0 0 1 64 14V50A14 14 0 0 1 50 64H3A3 3 0 0 1 0 61V14A14 14 0 0 1 14 0Z"/>
+  <path fill="none" stroke="#A8955A" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" d="M9 41V55H23"/>
+  <g fill="none" stroke="#2E2A24" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M23 16V47"/><path d="M43 16L26.5 32.5"/><path d="M31 28.5L45 47"/>
+  </g>
+  <text x="82" y="43" fill="#2E2A24" font-family="Fraunces, Georgia, serif" font-weight="600" font-size="31" letter-spacing="-0.3">Kayla's Korner</text>
+</svg>

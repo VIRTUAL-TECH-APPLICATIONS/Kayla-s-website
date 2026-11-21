@@ -6,9 +6,19 @@
     <title>Kayla's Korner — Honest Reviews. Helpful Finds.</title>
     <meta name="description" content="Kayla's Korner: honest product reviews and helpful finds for home, tech, pets and everyday living.">
 
-    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" href="/favicon.ico" sizes="32x32">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#fbf5ec">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Kayla's Korner — Honest Reviews. Helpful Finds.">
+    <meta property="og:description" content="Honest product reviews and helpful finds for home, tech, pets and everyday living.">
+    <meta property="og:image" content="{{ asset('assets/brand/icon-512.png') }}">
+
+    <script>document.documentElement.classList.add('is-loading');</script>
+    <noscript><style>.preloader { display: none !important; }</style></noscript>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -91,11 +101,55 @@
         .site-header.scrolled { border-color: var(--cream-deep); box-shadow: 0 6px 24px -18px rgba(0,0,0,.4); }
         .nav { display: flex; align-items: center; justify-content: space-between; height: 72px; }
         .logo { font-family: var(--serif); font-size: 1.45rem; font-weight: 600; display: flex; align-items: center; gap: 10px; }
-        .logo-mark {
-            width: 38px; height: 38px; border-radius: 12px 12px 12px 2px;
-            background: var(--peach); display: grid; place-items: center;
-            font-size: 1.05rem; color: var(--ink);
+        .logo-mark { width: 38px; height: 38px; flex: none; display: block; transition: transform .35s ease; }
+        .logo:hover .logo-mark { transform: rotate(-6deg) scale(1.05); }
+
+        /* ---------- Preloader ---------- */
+        html.is-loading { overflow: hidden; }
+        .preloader {
+            position: fixed; inset: 0; z-index: 100;
+            display: grid; place-items: center;
+            background: var(--cream);
+            transition: opacity .6s ease, visibility .6s ease;
         }
+        .preloader::before {
+            content: ''; position: absolute; width: 520px; height: 520px; border-radius: 50%;
+            background: radial-gradient(circle, var(--peach-soft) 0%, transparent 68%);
+            animation: pl-breathe 2.4s ease-in-out infinite;
+        }
+        .preloader.done { opacity: 0; visibility: hidden; }
+        .preloader.done .pl-inner { transform: translateY(-14px) scale(.97); }
+        .pl-inner {
+            position: relative; display: flex; flex-direction: column; align-items: center;
+            transition: transform .6s ease;
+        }
+        .pl-mark { width: 96px; height: 96px; overflow: visible; }
+        .pl-tile { transform-origin: 32px 32px; animation: pl-pop .6s cubic-bezier(.34,1.56,.64,1) both; }
+        .pl-draw { stroke-dasharray: 1; stroke-dashoffset: 1; animation: pl-draw .45s cubic-bezier(.65,0,.35,1) forwards; }
+        .pl-stem { animation-delay: .35s; }
+        .pl-arm { animation-delay: .62s; }
+        .pl-leg { animation-delay: .82s; }
+        .pl-corner { animation-delay: 1.05s; animation-duration: .5s; }
+        .pl-word {
+            margin-top: 22px; font-family: var(--serif); font-weight: 600; font-size: 1.7rem; letter-spacing: -.01em;
+            animation: pl-rise .6s ease .9s both;
+        }
+        .pl-tag {
+            margin-top: 4px; font-size: .74rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase;
+            color: var(--olive-deep); animation: pl-rise .6s ease 1.05s both;
+        }
+        .pl-bar {
+            margin-top: 26px; width: 140px; height: 3px; border-radius: 3px;
+            background: var(--cream-deep); overflow: hidden; animation: pl-rise .6s ease 1.1s both;
+        }
+        .pl-bar span {
+            display: block; height: 100%; width: 100%; border-radius: inherit; background: var(--olive);
+            transform: scaleX(var(--progress, .08)); transform-origin: left; transition: transform .4s ease;
+        }
+        @keyframes pl-pop { from { transform: scale(.4) rotate(-12deg); opacity: 0; } to { transform: none; opacity: 1; } }
+        @keyframes pl-draw { to { stroke-dashoffset: 0; } }
+        @keyframes pl-rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+        @keyframes pl-breathe { 0%, 100% { transform: scale(.92); opacity: .8; } 50% { transform: scale(1.06); opacity: 1; } }
         .nav-links { display: flex; gap: 34px; list-style: none; font-weight: 500; font-size: .95rem; }
         .nav-links a { position: relative; padding: 4px 0; }
         .nav-links a::after {
@@ -223,8 +277,14 @@
         /* ---------- Footer ---------- */
         footer { background: var(--ink); color: var(--cream); padding: 56px 0 36px; }
         .foot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 24px; }
-        .foot .logo-mark { background: var(--peach); }
         .foot-motto { font-family: var(--serif); font-size: 1.25rem; font-style: italic; color: var(--peach); }
+        .cta-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+        .btn-call .phone-ico { width: 17px; height: 17px; }
+        .btn-call:hover svg { transform: none; }
+        .foot-mid { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+        .foot-phone { display: inline-flex; align-items: center; gap: 8px; font-weight: 500; letter-spacing: .02em; opacity: .9; transition: color .25s ease; }
+        .foot-phone:hover { color: var(--peach); opacity: 1; }
+        .foot-phone svg { width: 16px; height: 16px; }
         .foot-links { display: flex; gap: 22px; list-style: none; font-size: .92rem; opacity: .8; }
         .foot-links a:hover { opacity: 1; color: var(--peach); }
         .copy { margin-top: 36px; padding-top: 22px; border-top: 1px solid rgba(251,245,236,.12); font-size: .85rem; opacity: .6; text-align: center; }
@@ -251,6 +311,8 @@
             html { scroll-behavior: auto; }
             .reveal { opacity: 1; transform: none; transition: none; }
             *, *::before, *::after { transition-duration: .01ms !important; }
+            .preloader *, .preloader::before { animation: none !important; }
+            .pl-draw { stroke-dashoffset: 0; }
         }
 
         /* ---------- Responsive ---------- */
@@ -308,6 +370,7 @@
             .cta { padding: 56px 0 72px; }
             .cta-box { padding: 40px 22px; border-radius: 28px; }
             .cta-box::before { width: 240px; height: 240px; right: -90px; top: -90px; }
+            .cta-actions { flex-direction: column; }
             .cta .btn { width: 100%; justify-content: center; }
             .foot { flex-direction: column; text-align: center; }
             .foot-links { justify-content: center; }
@@ -316,9 +379,37 @@
 </head>
 <body class="no-js">
 
+    {{-- Brand mark, reused by the header and footer --}}
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <symbol id="kk-mark" viewBox="0 0 64 64">
+            <path fill="#F6CFAB" d="M14 0H50A14 14 0 0 1 64 14V50A14 14 0 0 1 50 64H3A3 3 0 0 1 0 61V14A14 14 0 0 1 14 0Z"/>
+            <path fill="none" stroke="#A8955A" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" d="M9 41V55H23"/>
+            <g fill="none" stroke="#2E2A24" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M23 16V47"/><path d="M43 16L26.5 32.5"/><path d="M31 28.5L45 47"/>
+            </g>
+        </symbol>
+    </svg>
+
+    <div class="preloader" role="status" aria-label="Loading Kayla's Korner">
+        <div class="pl-inner">
+            <svg class="pl-mark" viewBox="0 0 64 64" aria-hidden="true">
+                <path class="pl-tile" fill="#F6CFAB" d="M14 0H50A14 14 0 0 1 64 14V50A14 14 0 0 1 50 64H3A3 3 0 0 1 0 61V14A14 14 0 0 1 14 0Z"/>
+                <path class="pl-draw pl-corner" pathLength="1" fill="none" stroke="#A8955A" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" d="M9 41V55H23"/>
+                <g fill="none" stroke="#2E2A24" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path class="pl-draw pl-stem" pathLength="1" d="M23 16V47"/>
+                    <path class="pl-draw pl-arm" pathLength="1" d="M43 16L26.5 32.5"/>
+                    <path class="pl-draw pl-leg" pathLength="1" d="M31 28.5L45 47"/>
+                </g>
+            </svg>
+            <div class="pl-word">Kayla's Korner</div>
+            <div class="pl-tag">Honest Reviews. Helpful Finds.</div>
+            <div class="pl-bar"><span></span></div>
+        </div>
+    </div>
+
     <header class="site-header" id="top">
         <nav class="container nav" aria-label="Main">
-            <a href="#top" class="logo"><span class="logo-mark">K</span> Kayla's Korner</a>
+            <a href="#top" class="logo"><svg class="logo-mark" aria-hidden="true"><use href="#kk-mark"/></svg> Kayla's Korner</a>
             <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
             </button>
@@ -464,9 +555,15 @@
                         <p>Thank you for visiting Kayla's Korner and supporting this growing community. Every visit, recommendation, and purchase helps this little corner continue to grow.</p>
                         <p><strong>Happy Shopping!</strong></p>
                         <div class="signature">— Kayla</div>
-                        <a href="#explore" class="btn btn-primary">Start Exploring
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-                        </a>
+                        <div class="cta-actions">
+                            <a href="#explore" class="btn btn-primary">Start Exploring
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                            </a>
+                            <a href="tel:+14048447357" class="btn btn-ghost btn-call" aria-label="Call Kayla's Korner at (404) 844-7357">
+                                <svg class="phone-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+                                (404) 844-7357
+                            </a>
+                        </div>
                     </div>
                     <div class="cta-img">
                         <img src="{{ asset('assets/images/3.webp') }}" alt="Beauty products in warm peach tones" loading="lazy">
@@ -479,8 +576,14 @@
     <footer>
         <div class="container">
             <div class="foot">
-                <a href="#top" class="logo"><span class="logo-mark">K</span> Kayla's Korner</a>
-                <p class="foot-motto">Explore. Discover. Shop with Confidence.</p>
+                <a href="#top" class="logo"><svg class="logo-mark" aria-hidden="true"><use href="#kk-mark"/></svg> Kayla's Korner</a>
+                <div class="foot-mid">
+                    <p class="foot-motto">Explore. Discover. Shop with Confidence.</p>
+                    <a href="tel:+14048447357" class="foot-phone">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+                        (404) 844-7357
+                    </a>
+                </div>
                 <ul class="foot-links">
                     <li><a href="#why">About</a></li>
                     <li><a href="#explore">Explore</a></li>
@@ -494,8 +597,8 @@
     <script>
         document.body.classList.remove('no-js');
 
-        // Fade-in on scroll
-        (function () {
+        // Fade-in on scroll (started once the preloader has lifted)
+        function startReveal() {
             var items = document.querySelectorAll('.reveal');
             if (!('IntersectionObserver' in window)) {
                 items.forEach(function (el) { el.classList.add('is-visible'); });
@@ -513,6 +616,53 @@
                 });
             }, { threshold: [0, 0.15], rootMargin: '0px 0px -40px 0px' });
             items.forEach(function (el) { io.observe(el); });
+        }
+
+        // Preloader
+        (function () {
+            var loader = document.querySelector('.preloader');
+            var bar = loader.querySelector('.pl-bar span');
+            var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            var seen = false;
+            try { seen = sessionStorage.getItem('kk-seen') === '1'; sessionStorage.setItem('kk-seen', '1'); } catch (e) {}
+
+            // Let the logo finish drawing on the first visit; keep it brief after that.
+            var minTime = reduced ? 200 : (seen ? 600 : 1700);
+            var start = Date.now();
+            var finished = false;
+
+            // Progress follows the images the browser loads up front.
+            var imgs = Array.prototype.filter.call(document.images, function (img) {
+                return img.loading !== 'lazy';
+            });
+            var loaded = 0;
+            function tick() {
+                loaded++;
+                bar.style.setProperty('--progress', Math.max(.08, Math.min(.9, loaded / (imgs.length || 1))));
+            }
+            imgs.forEach(function (img) {
+                if (img.complete) { tick(); }
+                else {
+                    img.addEventListener('load', tick, { once: true });
+                    img.addEventListener('error', tick, { once: true });
+                }
+            });
+
+            function finish() {
+                if (finished) return;
+                finished = true;
+                bar.style.setProperty('--progress', 1);
+                setTimeout(function () {
+                    loader.classList.add('done');
+                    document.documentElement.classList.remove('is-loading');
+                    startReveal();
+                    setTimeout(function () { loader.remove(); }, 700);
+                }, Math.max(0, minTime - (Date.now() - start)) + 250);
+            }
+
+            if (document.readyState === 'complete') finish();
+            else window.addEventListener('load', finish);
+            setTimeout(finish, 6000); // never hold the page hostage on a slow connection
         })();
 
         // Header shadow + active nav link
