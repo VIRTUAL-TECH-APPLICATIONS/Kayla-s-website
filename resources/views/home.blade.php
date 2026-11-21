@@ -50,7 +50,7 @@
             --sans: 'DM Sans', system-ui, -apple-system, sans-serif;
 
             /* Role colours (things that must not simply invert) */
-            --header-bg: rgba(251, 245, 236, .86);
+            --header-bg: rgba(251, 245, 236, .68);
             --btn-hover: #443d33;
             --band-bg: var(--olive);
             --on-band: #fffdf9;
@@ -75,7 +75,7 @@
             --white: #231f1a;
             --shadow: 0 18px 40px -18px rgba(0, 0, 0, .7);
 
-            --header-bg: rgba(26, 23, 19, .82);
+            --header-bg: rgba(26, 23, 19, .66);
             --btn-hover: #ffffff;
             --band-bg: #3b3420;
             --on-band: #f6efe3;
@@ -117,7 +117,8 @@
             background: var(--cream);
             line-height: 1.65;
             -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
+            /* clip (not hidden) so the body doesn't become a scroll box, which would break the sticky header */
+            overflow-x: clip;
         }
 
         img { display: block; max-width: 100%; }
@@ -156,8 +157,8 @@
         .site-header {
             position: sticky; top: 0; z-index: 50;
             background: var(--header-bg);
-            backdrop-filter: saturate(140%) blur(10px);
-            -webkit-backdrop-filter: saturate(140%) blur(10px);
+            backdrop-filter: saturate(160%) blur(16px);
+            -webkit-backdrop-filter: saturate(160%) blur(16px);
             border-bottom: 1px solid transparent;
             transition: border-color .3s ease, box-shadow .3s ease;
         }
