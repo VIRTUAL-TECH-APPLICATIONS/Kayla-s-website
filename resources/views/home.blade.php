@@ -382,9 +382,9 @@
         .btn-call .phone-ico { width: 17px; height: 17px; }
         .btn-call:hover svg { transform: none; }
         .foot-mid { display: flex; flex-direction: column; align-items: center; gap: 8px; }
-        .foot-phone { display: inline-flex; align-items: center; gap: 8px; font-weight: 500; letter-spacing: .02em; opacity: .9; transition: color .25s ease; }
-        .foot-phone:hover { color: var(--peach); opacity: 1; }
-        .foot-phone svg { width: 16px; height: 16px; }
+        .foot-contact { display: inline-flex; align-items: center; gap: 8px; font-weight: 500; letter-spacing: .02em; opacity: .9; transition: color .25s ease; }
+        .foot-contact:hover { color: var(--peach); opacity: 1; }
+        .foot-contact svg { width: 16px; height: 16px; flex: none; }
         .foot-links { display: flex; gap: 22px; list-style: none; font-size: .92rem; opacity: .8; }
         .foot-links a:hover { opacity: 1; color: var(--peach); }
         .copy { margin-top: 36px; padding-top: 22px; border-top: 1px solid rgba(251,245,236,.12); font-size: .85rem; opacity: .6; text-align: center; }
@@ -668,9 +668,9 @@
                             <a href="#explore" class="btn btn-primary">Start Exploring
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
                             </a>
-                            <a href="tel:+14048447357" class="btn btn-ghost btn-call" aria-label="Call Kayla's Korner at (404) 844-7357">
+                            <a href="tel:+16788863780" class="btn btn-ghost btn-call" aria-label="Call Kayla's Korner at (678) 886-3780">
                                 <svg class="phone-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
-                                (404) 844-7357
+                                (678) 886-3780
                             </a>
                         </div>
                     </div>
@@ -701,9 +701,13 @@
                 <a href="#top" class="logo"><svg class="logo-mark" aria-hidden="true"><use href="#kk-mark"/></svg> Kayla's Korner</a>
                 <div class="foot-mid">
                     <p class="foot-motto">Explore. Discover. Shop with Confidence.</p>
-                    <a href="tel:+14048447357" class="foot-phone">
+                    <a href="tel:+16788863780" class="foot-contact">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
-                        (404) 844-7357
+                        (678) 886-3780
+                    </a>
+                    <a href="mailto:cowgirlkayla1222@gmail.com" class="foot-contact">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+                        cowgirlkayla1222@gmail.com
                     </a>
                 </div>
                 <ul class="foot-links">
