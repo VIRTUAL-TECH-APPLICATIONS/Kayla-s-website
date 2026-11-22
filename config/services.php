@@ -35,4 +35,6 @@ return [
         ],
     ],
 
+    'contact_email' => env('CONTACT_EMAIL', 'cowgirlkayla1222@gmail.com'),
+
 ];

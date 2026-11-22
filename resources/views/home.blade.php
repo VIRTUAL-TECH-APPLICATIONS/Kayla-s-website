@@ -338,6 +338,42 @@
         .cta-img { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); transform: rotate(2deg); }
         .cta-img img { width: 100%; aspect-ratio: 1; object-fit: cover; }
 
+        /* ---------- Contact ---------- */
+        .contact { padding: 110px 0; background: var(--white); }
+        .contact-form {
+            max-width: 760px; margin-inline: auto; padding: clamp(24px, 5vw, 48px);
+            background: var(--cream); border-radius: var(--radius); box-shadow: var(--shadow);
+            display: grid; gap: 20px;
+        }
+        .contact-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .contact-field { display: grid; gap: 8px; }
+        .contact-field-full { grid-column: 1 / -1; }
+        .contact-field label { font-weight: 700; font-size: .92rem; }
+        .contact-field input, .contact-field textarea {
+            width: 100%; padding: 13px 15px; border: 1px solid var(--cream-deep);
+            border-radius: 12px; background: var(--white); color: var(--ink);
+            font: inherit; transition: border-color .2s ease, box-shadow .2s ease;
+        }
+        .contact-field textarea { min-height: 170px; resize: vertical; }
+        .contact-field input:focus, .contact-field textarea:focus {
+            outline: none; border-color: var(--olive); box-shadow: 0 0 0 3px color-mix(in srgb, var(--olive) 22%, transparent);
+        }
+        .contact-field input[aria-invalid="true"], .contact-field textarea[aria-invalid="true"] { border-color: #b5473c; }
+        .field-error { color: #b5473c; font-size: .88rem; }
+        .contact-submit { justify-self: start; border: 0; cursor: pointer; font-family: inherit; }
+        .contact-submit:disabled { opacity: .7; cursor: wait; }
+        .contact-noscript { max-width: 760px; margin: 0 auto 20px; color: var(--ink-soft); }
+        [x-cloak] { display: none !important; }
+        .contact-toast {
+            position: fixed; right: 20px; bottom: 20px; z-index: 90; width: min(390px, calc(100% - 40px));
+            display: flex; align-items: flex-start; gap: 16px; padding: 18px 20px;
+            border: 1px solid var(--olive); border-radius: 16px; background: var(--white);
+            color: var(--ink); box-shadow: var(--shadow);
+        }
+        .contact-toast-error { border-color: #b5473c; }
+        .contact-toast-close { margin-left: auto; border: 0; background: none; color: var(--ink-soft); font: inherit; font-size: 1.4rem; line-height: 1; cursor: pointer; }
+        .contact-toast-close:focus-visible { outline: 2px solid var(--olive); outline-offset: 3px; }
+
         /* ---------- Footer ---------- */
         footer { background: var(--footer-bg); color: var(--footer-fg); padding: 56px 0 36px; }
         .foot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 24px; }
@@ -411,6 +447,7 @@
             .cta-box { padding: 48px 28px; gap: 40px; }
             .cta-img { max-width: 320px; width: 100%; margin-inline: auto; transform: rotate(1.5deg); }
             .why, .explore, .promise, .cta { padding: 72px 0; }
+            .contact { padding: 72px 0; }
             .section-head { margin-bottom: 40px; }
         }
         @media (max-width: 560px) {
@@ -424,6 +461,8 @@
             .hero-actions { flex-direction: column; }
             .hero-actions .btn { justify-content: center; width: 100%; }
             .cards, .promises { grid-template-columns: 1fr; }
+            .contact-fields { grid-template-columns: 1fr; }
+            .contact-field-full { grid-column: auto; }
             .card-img { aspect-ratio: 16 / 11; }
             .collage { gap: 10px; }
             .collage .tall { border-radius: 140px 140px 18px 18px; }
@@ -478,7 +517,7 @@
                 <li><a href="#why">About</a></li>
                 <li><a href="#explore">Explore</a></li>
                 <li><a href="#promise">My Promise</a></li>
-                <li><a href="#shop">Say Hello</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
             <div class="nav-tools">
                 <button class="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false">
@@ -641,6 +680,19 @@
                 </div>
             </div>
         </section>
+
+        <!-- Contact -->
+        <section class="contact" id="contact">
+            <div class="container">
+                <div class="section-head">
+                    <span class="eyebrow reveal">Get in touch</span>
+                    <h2 class="reveal" style="--delay:.1s">Say hello to Kayla</h2>
+                    <p class="reveal" style="--delay:.2s">Have a question or a product recommendation? Send me a message.</p>
+                </div>
+
+                <livewire:contact-form />
+            </div>
+        </section>
     </main>
 
     <footer>
@@ -658,6 +710,7 @@
                     <li><a href="#why">About</a></li>
                     <li><a href="#explore">Explore</a></li>
                     <li><a href="#promise">Promise</a></li>
+                    <li><a href="#contact">Contact</a></li>
                 </ul>
             </div>
             <p class="copy">&copy; {{ date('Y') }} Kayla's Korner. All rights reserved.</p>
