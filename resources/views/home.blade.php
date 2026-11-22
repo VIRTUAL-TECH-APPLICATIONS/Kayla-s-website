@@ -340,6 +340,15 @@
 
         /* ---------- Contact ---------- */
         .contact { padding: 110px 0; background: var(--white); }
+        .contact .section-head { margin-bottom: 28px; }
+        .contact-disclosure { max-width: 760px; margin-inline: auto; }
+        .contact-disclosure summary { display: flex; width: fit-content; margin-inline: auto; list-style: none; cursor: pointer; }
+        .contact-disclosure summary::-webkit-details-marker { display: none; }
+        .contact-disclosure summary:focus-visible { outline: 2px solid var(--olive); outline-offset: 4px; }
+        .contact-disclosure summary svg, .contact-disclosure summary:hover svg { transform: rotate(90deg); }
+        .contact-disclosure[open] summary svg { transform: rotate(-90deg); }
+        .contact-disclosure[open] summary:hover svg { transform: rotate(-90deg); }
+        .contact-disclosure[open] .contact-form { margin-top: 28px; }
         .contact-form {
             max-width: 760px; margin-inline: auto; padding: clamp(24px, 5vw, 48px);
             background: var(--cream); border-radius: var(--radius); box-shadow: var(--shadow);
